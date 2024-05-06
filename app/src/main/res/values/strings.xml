@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Assessment 2</string>
+    <string name="welcome_text">Explore !</string>
+    <string name="app_name">FinNote</string>
+    <string name="intro">Welcome to FinNote \n (Financial Note)</string>
+    <string name="start">Start</string>
+    <string name="home_button">Back</string>
+    <string name="empty">Empty List !</string>
+    <string name="clicky_list">%1$s click!</string>
+    <string name="add_note">Add Note</string>
+    <string name="add_error">Cannot Add Note</string>
 </resources>
