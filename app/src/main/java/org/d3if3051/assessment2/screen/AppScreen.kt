@@ -1,7 +1,6 @@
 package org.d3if3051.assessment2.screen
 
 import android.content.res.Configuration
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -37,13 +38,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3051.assessment2.R
+import org.d3if3051.assessment2.database.FinanceDb
 import org.d3if3051.assessment2.model.Finance
+import org.d3if3051.assessment2.navigation.ScreenApp
 import org.d3if3051.assessment2.ui.theme.Assessment2Theme
+import org.d3if3051.assessment2.util.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScreen(navController: NavHostController){
-    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -69,26 +72,28 @@ fun AppScreen(navController: NavHostController){
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    Toast.makeText(context, R.string.add_error, Toast.LENGTH_SHORT).show()
+                    navController.navigate(ScreenApp.NewForm.route)
                 }
             ) {
                 Icon(
-                    imageVector = Icons.Filled.AddCircle,
+                    imageVector = Icons.Filled.Create,
                     contentDescription = stringResource(R.string.add_note),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
     ){ padding ->
-        ScreenContent(Modifier.padding(padding))
+        ScreenContent(Modifier.padding(padding), navController)
     }
 }
 
 @Composable
-fun ScreenContent(modifier: Modifier){
-    val viewModel: MainViewModel = viewModel()
-    val data = viewModel.data
+fun ScreenContent(modifier: Modifier, navController: NavHostController){
     val context = LocalContext.current
+    val db = FinanceDb.getInstance(context)
+    val factory = ViewModelFactory(db.dao)
+    val viewModel: MainViewModel = viewModel(factory = factory)
+    val data by viewModel.data.collectAsState()
 
     if (data.isEmpty()){
         Column(
@@ -109,8 +114,7 @@ fun ScreenContent(modifier: Modifier){
         ) {
             items(data) {
                 ListNote(finance = it){
-                    val message = context.getString(R.string.clicky_list, it.title)
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    navController.navigate(ScreenApp.ChangeForm.withId(it.id))
                 }
                 Divider()
             }
@@ -136,6 +140,11 @@ fun ListNote(finance: Finance, onClick: () -> Unit){
         Text(
             text = finance.note,
             maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = finance.category,
+            maxLines = 3,
             overflow = TextOverflow.Ellipsis
         )
         Text(text = finance.date)

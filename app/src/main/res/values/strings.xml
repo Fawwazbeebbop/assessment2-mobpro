@@ -4,8 +4,22 @@
     <string name="intro">Welcome to FinNote \n (Financial Note)</string>
     <string name="start">Start</string>
     <string name="home_button">Back</string>
-    <string name="empty">Empty List !</string>
+    <string name="empty">Data is Empty !</string>
     <string name="clicky_list">%1$s click!</string>
     <string name="add_note">Add Note</string>
+    <string name="change_note">Edit Note</string>
     <string name="add_error">Cannot Add Note</string>
+    <string name="title">Title</string>
+    <string name="note">Note</string>
+    <string name="category">Category:</string>
+    <string name="list_category1">Shopping</string>
+    <string name="list_category2">Travelling</string>
+    <string name="list_category3">Gaming</string>
+    <string name="list_category4">Coding</string>
+    <string name="list_category5">Studying</string>
+    <string name="back_button">Back</string>
+    <string name="save_button">Save</string>
+    <string name="note_invalid">Title, Note, and Category cannot be empty !</string>
+    <string name="delete_button">Delete</string>
+    <string name="delete">Delete Note</string>
 </resources>
