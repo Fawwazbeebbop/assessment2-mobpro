@@ -66,6 +66,8 @@ fun AddNoteScreen(navControlller: NavHostController, id: Long? = null){
     var note by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
 
+    var showAlert by remember { mutableStateOf(false) }
+
     LaunchedEffect(true){
         if (id == null) return@LaunchedEffect
         val data = viewModel.getFinance(id) ?: return@LaunchedEffect
@@ -116,7 +118,12 @@ fun AddNoteScreen(navControlller: NavHostController, id: Long? = null){
                         )
                     }
                     if (id != null){
-                        DeleteNote {
+                        DeleteNote { showAlert = true }
+                        DisplayAlert(
+                            openDialog = showAlert,
+                            onDismissReq = { showAlert = false }
+                        ) {
+                            showAlert = false
                             viewModel.delete(id)
                             navControlller.popBackStack()
                         }
@@ -201,7 +208,7 @@ fun FormPencatatan(
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
-                imeAction = ImeAction.Next
+                imeAction = ImeAction.Done
             ),
             modifier = Modifier.fillMaxWidth()
         )

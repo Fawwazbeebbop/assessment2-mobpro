@@ -22,4 +22,9 @@
     <string name="note_invalid">Title, Note, and Category cannot be empty !</string>
     <string name="delete_button">Delete</string>
     <string name="delete">Delete Note</string>
+    <string name="delete_message">Delete this Note?</string>
+    <string name="button_del">Yes</string>
+    <string name="button_no">No</string>
+    <string name="list_view">List View</string>
+    <string name="grid_view">Grid View</string>
 </resources>
