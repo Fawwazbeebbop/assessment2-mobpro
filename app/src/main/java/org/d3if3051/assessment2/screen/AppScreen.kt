@@ -2,6 +2,7 @@ package org.d3if3051.assessment2.screen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -153,6 +155,12 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                modifier = modifier
+                    .size(133.dp),
+                painter = painterResource(id = R.drawable.empty_note),
+                contentDescription = "Empty List Logo"
+            )
             Text(text = stringResource(id = R.string.empty))
         }
     }

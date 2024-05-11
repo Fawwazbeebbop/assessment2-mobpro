@@ -4,8 +4,7 @@
     <string name="intro">Welcome to FinNote \n (Financial Note)</string>
     <string name="start">Start</string>
     <string name="home_button">Back</string>
-    <string name="empty">Data is Empty !</string>
-    <string name="clicky_list">%1$s click!</string>
+    <string name="empty">List is Empty !</string>
     <string name="add_note">Add Note</string>
     <string name="change_note">Edit Note</string>
     <string name="add_error">Cannot Add Note</string>
